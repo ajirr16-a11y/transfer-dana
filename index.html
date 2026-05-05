@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transfer</title>
+
+<style>
+body {
+  margin: 0;
+  background: #f2f4f7;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.container {
+  max-width: 420px;
+  margin: auto;
+  padding: 15px;
+}
+
+.card {
+  background: white;
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.header {
+  font-size: 14px;
+  color: #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.timer {
+  background: #ffe5ea;
+  color: #e11d48;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.section {
+  margin-top: 20px;
+}
+
+.bank {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bank-logo {
+  width: 40px;
+  height: 40px;
+  background: #e6f0ff;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #0057b8;
+}
+
+.box {
+  margin-top: 10px;
+  background: #f3f4f6;
+  padding: 14px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+}
+
+.copy {
+  border: 2px solid #ff7a00;
+  color: #ff7a00;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.note {
+  margin-top: 15px;
+  background: #fff6e5;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 13px;
+  color: #444;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <div class="card">
+
+    <div class="header">
+      <span>Transfer sebelum 5 Mei 2026, 16:40 WIB</span>
+      <span class="timer" id="timer">00:00:00</span>
+    </div>
+
+    <div class="section">
+      <div class="bank">
+        <div class="bank-logo">BRI</div>
+        <div>
+          <div style="font-weight:600;">Bank BRI</div>
+          <div style="font-size:13px; color:#555;">FLIPTECH LENTERA INSPIRASI PERTIWI</div>
+        </div>
+      </div>
+
+      <div class="box">
+        <span>067201000360306</span>
+        <span class="copy" onclick="copy('067201000360306')">Salin</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <div style="font-size:14px; margin-bottom:6px;">Jumlah Transfer</div>
+      <div class="box">
+        <span>Rp1.500.415</span>
+        <span class="copy" onclick="copy('1500415')">Salin</span>
+      </div>
+    </div>
+
+    <div class="note">
+      <b>Pastikan jumlah transfernya sama ya</b><br>
+      Kode unik akan dikembalikan ke saldo kamu.
+    </div>
+
+  </div>
+</div>
+
+<script>
+const target = new Date("2026-05-05T16:40:00+07:00").getTime();
+
+function updateTimer() {
+  const now = new Date().getTime();
+  const diff = target - now;
+
+  if (diff <= 0) {
+    document.getElementById("timer").innerText = "00:00:00";
+    return;
+  }
+
+  const h = Math.floor((diff / (1000*60*60)) % 24);
+  const m = Math.floor((diff / (1000*60)) % 60);
+  const s = Math.floor((diff / 1000) % 60);
+
+  document.getElementById("timer").innerText =
+    String(h).padStart(2,'0') + ":" +
+    String(m).padStart(2,'0') + ":" +
+    String(s).padStart(2,'0');
+}
+
+setInterval(updateTimer, 1000);
+updateTimer();
+
+function copy(text) {
+  navigator.clipboard.writeText(text);
+}
+</script>
+
+</body>
+</html>
